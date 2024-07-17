@@ -1,7 +1,8 @@
 package com.medihelp.medihelp.controllers;
 
 
+import org.springframework.stereotype.Controller;
 
-@Controller
+@0Controller
 public class ClincController {
 }

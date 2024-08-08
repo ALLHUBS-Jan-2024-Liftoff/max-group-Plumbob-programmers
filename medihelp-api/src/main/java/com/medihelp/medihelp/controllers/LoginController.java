@@ -14,14 +14,14 @@ public class LoginController {
         return "<html>" +
                 "<body>" +
                 "<form method='POST' action=/'login'>" +
-                "input type='text' name='username' placeholder='Username'/>" +
+                "input type='text' name='username' placeholder='Username'/>" +  //placeholder form
                 "input type='password' name='password' placeholder='password'/>" +
                 "input type='submit' value='Login'>" +
                 "</form>" +
                 "</body>" +
                 "</html>";
     }
-    @PostMapping("/login")
+    @PostMapping("/login") //authentication bones
     @ResponseBody
     public String handleLogin(@RequestParam String username, @RequestParam String password) {
         if (authenticate(username,password)) {
@@ -31,6 +31,7 @@ public class LoginController {
         }
     }
     private boolean authenticate(String username, String password) {
+        //put in authentication logic
         return "admin".equals(username) && "password".equals(password);
     }
 }

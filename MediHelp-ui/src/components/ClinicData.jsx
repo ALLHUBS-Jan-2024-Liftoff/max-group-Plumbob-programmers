@@ -4,27 +4,15 @@ import genHospital from "../images/genHospital.png";
 import childrenHospital from "../images/childrenHospital.png";
 import psychiatric from "../images/psychiatric.png";
 import DoD from "../images/DoD.png";
-<<<<<<< HEAD
 import veteransHospital from "../images/veteransHospital.png";
-=======
-import veteransHospital from "../images/VeteransHospital.png";
->>>>>>> 8273f83edeb925183c33fb1c720755864656487e
 import criticalHospital from "../images/criticalHospital.png";
 
 export default function ClinicData() {
     const [data, setData] = useState([]); 
     const [error, setError] = useState(null);
-<<<<<<< HEAD
     const [offset, setOffset] = useState(0);
     
    
-=======
-    // const [allData, setAllData] = useState([]);
-    let allData =[];
-    let allDataPage1 =[];
-
-
->>>>>>> 8273f83edeb925183c33fb1c720755864656487e
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -44,24 +32,12 @@ export default function ClinicData() {
                 setError(error); 
                 console.error('Error fetching data:', error);
             }
-<<<<<<< HEAD
         };
 
         fetchData();
     }, [offset]);
            
     
-=======
-            
-            fetchAttempt++;
-            offset += 100;
-        };}
-        fetchData();
-  
-     
-
-    }, []); 
->>>>>>> 8273f83edeb925183c33fb1c720755864656487e
     function hospitalType(hospital_type){
         if (hospital_type === "Acute Care Hospitals") {
             return (
@@ -89,10 +65,7 @@ export default function ClinicData() {
             );
         }
     };
-<<<<<<< HEAD
   
-=======
->>>>>>> 8273f83edeb925183c33fb1c720755864656487e
 
     if (error) {
         return <div>Error fetching data: {error.message}</div>;
@@ -117,17 +90,10 @@ export default function ClinicData() {
             <div >
                 {data.map((item, index) => (
                     <div key={index} className='inline-flex w-2/4 p-6 h-64'>
-<<<<<<< HEAD
                         <div className='grid grid-rows-3 grid-flow-col px-4 py-4 leading-10 border-solid border-2 bg-gray-700 bg-opacity-5 text-left w-full gap-1 rounded-lg 
                         transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none hover:border-black'>
                             {hospitalType(item.hospital_type)}
                             <h3 className='row-span-1 text-xl '>{item.facility_name}</h3>
-=======
-                        <div className='grid grid-rows-3 grid-flow-col px-4 py-4 leading-10 border-solid border-2 bg-gray-700 bg-opacity-5 text-left w-full gap-1 rounded-lg '>
-                            {hospitalType(item.hospital_type)}
-                            <h3 className='row-span-1 text-xl '>{item.facility_name}</h3>
-                            <h3 className='row-span-1 ' >{item.address}</h3>
->>>>>>> 8273f83edeb925183c33fb1c720755864656487e
                             <div className='col-span-1 row-span-1 '>
                             <h3 className='row-span-1 ' >{item.address}</h3>    
                                 <p >City: {item.citytown}</p>

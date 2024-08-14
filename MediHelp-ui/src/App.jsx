@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import BadPage from './pages/BadPage';
 import MainPage from './pages/MainPage';
+import Register from './pages/Register';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
           <Route index element={<Home />}/>
           <Route path="/home" element={<Home />}/>
           <Route path="/login" element={<Login />}/>
+          <Route path="/register" element={<Register />}/>
           <Route path="/MainPage" element={<MainPage />}/>
           <Route path="*" element={<BadPage />}/>
         </Routes>

@@ -3,17 +3,15 @@ import Banner from "../components/banners";
 import Footer from "../components/footer";
 import ClinicData from "../components/ClinicData";
 import SearchBar from "../components/SearchBar";
+import Users from '../components/users';
 export default function MainPage(){
     return    (   
     <>
     <div>
       <Banner />
     </div>
-    <div>
-     <SearchBar/>
-    </div>
      <div>
-     <ClinicData/>
+     <Users />
      </div>
     <div>
       <Footer />

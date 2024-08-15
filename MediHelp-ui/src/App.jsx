@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import BadPage from './pages/BadPage';
 import MainPage from './pages/MainPage';
 import Register from './pages/Register';
+import AdminPage from './pages/AdminPage';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" element={<Login />}/>
           <Route path="/register" element={<Register />}/>
           <Route path="/MainPage" element={<MainPage />}/>
+          <Route path="/Admin" element={<AdminPage />}/>
           <Route path="*" element={<BadPage />}/>
         </Routes>
       </BrowserRouter>

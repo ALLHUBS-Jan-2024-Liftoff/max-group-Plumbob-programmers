@@ -21,12 +21,12 @@ export default function Users(){
 
       const handleClick = async (id) => {
         try {
-            const response = await axios.delete("http://localhost:8080/users",{
-                params: {id : id}
-            }
+            const response = await axios.delete(`http://localhost:8080/users/${id}`
               
             );
             console.log('User has been deleted', response.data)
+            alert("User has been successfully deleted")
+            window.location.reload();
         } catch (error){
             console.error('Error deleting user: ', error);
         }
@@ -54,7 +54,10 @@ export default function Users(){
                     <td>{item.id}</td>
                     <td>{item.username}</td>
                     <td>{item.email}</td>
-                    <td><button onClick={() => handleClick(item.id)}className="select-none rounded-lg bg-red-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">Delete</button></td>
+                    
+                    <td>
+                        <button className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">View</button>
+                        <button onClick={() => handleClick(item.id)}className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Delete</button></td>
                 </tr>
                 
             

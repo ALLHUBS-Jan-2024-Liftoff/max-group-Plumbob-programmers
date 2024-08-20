@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 
 @RestController
@@ -24,5 +26,18 @@ public class UserController {
     public Iterable<User> displayUsers() {
         return userRepository.findAll();
 }
+
+    @GetMapping("/users/{id}")
+    User getUserById(@PathVariable Long id) {
+        return userRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("User not found"));
+
+    }
+
+    @DeleteMapping("/users/{id}")
+    String deleteUser(@PathVariable Long id) {
+        userRepository.deleteById(id);
+        return "user with id " + id + " has been deleted.";
+    }
 
 }

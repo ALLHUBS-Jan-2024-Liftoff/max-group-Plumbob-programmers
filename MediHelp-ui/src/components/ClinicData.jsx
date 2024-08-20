@@ -16,7 +16,7 @@ export default function ClinicData() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`https://cors-anywhere.herokuapp.com/https://data.cms.gov/provider-data/api/1/datastore/query/xubh-q36u/0?offset=${offset}&limit=100`, {
+                const response = await fetch(`https://cors-anywhere.herokuapp.com/https://data.cms.gov/provider-data/api/1/datastore/query/xubh-q36u/0?offset=${offset}&limit=50`, {
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest',
                     }
@@ -28,6 +28,7 @@ export default function ClinicData() {
 
                 const result = await response.json(); 
                 setData(result.results);
+                
             } catch (error) {
                 setError(error); 
                 console.error('Error fetching data:', error);
@@ -78,6 +79,8 @@ export default function ClinicData() {
     const previousPage = () => {
         setOffset(prevOffset => (prevOffset > 0 ? prevOffset - 100 : 0));
     };
+    
+    const [facilityState, setFacilityState] = useState([]);
 
     return (
         <div >
@@ -90,7 +93,7 @@ export default function ClinicData() {
             <div >
                 {data.map((item, index) => (
                     <div key={index} className='inline-flex w-2/4 p-6 h-64'>
-                        <div className='grid grid-rows-3 grid-flow-col px-4 py-4 leading-10 border-solid border-2 bg-gray-700 bg-opacity-5 text-left w-full gap-1 rounded-lg 
+                        <div onClick={() => setFacilityState(item)}className='grid grid-rows-3 grid-flow-col px-4 py-4 leading-10 border-solid border-2 bg-gray-700 bg-opacity-5 text-left w-full gap-1 rounded-lg 
                         transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none hover:border-black'>
                             {hospitalType(item.hospital_type)}
                             <h3 className='row-span-1 text-xl '>{item.facility_name}</h3>
@@ -103,15 +106,21 @@ export default function ClinicData() {
                                 Rating: 
                                 {item.hospital_overall_rating}/5
                             </h3>
+                           
                         </div>
-                    </div>
+                    </div> 
+                     
                 ))}
-            </div>
+                 <div>
+                     <h1>{facilityState.facility_name}</h1>
+                     <h2>{facilityState.address}</h2>
+                     <h2>{facilityState.citytown}</h2>
+                     <h2>{facilityState.state}</h2>
+                 </div>
+            </div>             
         ) : (
             <div>Loading...</div>
         )}
     </div>
-  
-        
     );
 }

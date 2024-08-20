@@ -1,5 +1,5 @@
 
-import logo from "../images/Logo.png"
+import logo from "../images/navbarLogo.png"
 import {Outlet, Link} from "react-router-dom";
 
 export default function Banner(){

@@ -29,7 +29,8 @@ export default function userPage() {
         user
       );
       console.log("Response:", response);
-      // window.location.href = "/Admin";
+      alert("User has been successfully updated!")
+      window.location.href = "/Admin";
     } catch (error) {
       console.error("Error updating user:", error);
     }
@@ -42,7 +43,7 @@ export default function userPage() {
 
   return (
     <div>
-      <h1 className="text-4xl">Edit User </h1>
+      <h1 className="text-4xl">Edit User:  {username}</h1>
       <div className="grid grid-col-4 grid-flow-col">
         <form onSubmit={(e) => onSave(e)}>
           <div className="">
@@ -77,8 +78,8 @@ export default function userPage() {
               <input
                 type={"text"}
                 name="password"
-                placeholder={password}
-                value={password}
+                placeholder="*********"
+                // value="*********"
                 onChange={(e) => onChange(e)}
                 className="h-12 border-4 border-none border-indigo-600 bg-indigo-100 shadow-2xl"
               />

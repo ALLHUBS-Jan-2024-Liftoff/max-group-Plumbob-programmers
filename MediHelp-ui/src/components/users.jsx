@@ -38,8 +38,8 @@ export default function Users() {
         <thead>
           <tr>
             <th className="px-16">ID</th>
-            <th className="px-16">Username</th>
-            <th className="px-16">Email</th>
+            <th className="px-48 ">Username</th>
+            <th className="px-48">Email</th>
             <th className="px-16">Action</th>
           </tr>
         </thead>

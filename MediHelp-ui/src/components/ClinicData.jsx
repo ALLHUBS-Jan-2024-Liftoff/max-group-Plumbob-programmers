@@ -108,11 +108,11 @@ export default function ClinicData() {
   }
 
   const nextPage = () => {
-    setOffset((prevOffset) => prevOffset + 100);
+    setOffset((prevOffset) => prevOffset + 50);
   };
 
   const previousPage = () => {
-    setOffset((prevOffset) => (prevOffset > 0 ? prevOffset - 100 : 0));
+    setOffset((prevOffset) => (prevOffset > 0 ? prevOffset - 50 : 0));
   };
 
   const [facilityState, setFacilityState] = useState([]);
@@ -136,33 +136,28 @@ export default function ClinicData() {
       </div>
       {data ? (
         <div>
-          {data.map((item, index) => (
+          {data.map((facility, index) => (
             <div key={index} className="inline-flex w-2/4 p-6 h-64">
               <div
-                onClick={() => setFacilityState(item)}
+                onClick={() => console.log(index + offset)}
                 className="grid grid-rows-3 grid-flow-col px-4 py-4 leading-10 border-solid border-2 bg-gray-700 bg-opacity-5 text-left w-full gap-1 rounded-lg 
                         transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none hover:border-black"
               >
-                {hospitalType(item.hospital_type)}
-                <h3 className="row-span-1 text-xl ">{item.facility_name}</h3>
+                {hospitalType(facility.hospital_type)}
+                <h3 className="row-span-1 text-xl ">{facility.facility_name}</h3>
                 <div className="col-span-1 row-span-1 ">
-                  <h3 className="row-span-1 ">{item.address}</h3>
-                  <p>City: {item.citytown}</p>
-                  <p>State: {item.state}</p>
+                  <h3 className="row-span-1 ">{facility.address}</h3>
+                  <p>City: {facility.citytown}</p>
+                  <p>State: {facility.state}</p>
                 </div>
                 <h3 className="col-span-10 row-span-2 row-start-5 text-right text-2xl">
                   Rating:
-                  {item.hospital_overall_rating}/5
+                  {facility.hospital_overall_rating}/5
                 </h3>
               </div>
             </div>
           ))}
-          <div>
-            <h1>{facilityState.facility_name}</h1>
-            <h2>{facilityState.address}</h2>
-            <h2>{facilityState.citytown}</h2>
-            <h2>{facilityState.state}</h2>
-          </div>
+        
         </div>
       ) : (
         <div>Loading...</div>

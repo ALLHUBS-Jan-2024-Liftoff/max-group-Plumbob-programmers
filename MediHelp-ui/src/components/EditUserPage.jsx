@@ -42,11 +42,11 @@ export default function userPage() {
   };
 
   return (
-    <div>
-      <h1 className="text-4xl">Edit User:  {username}</h1>
-      <div className="grid grid-col-4 grid-flow-col">
+    <div className="grid grid-col-4 grid-flow-col flex justify-center items-center py-4">
+      <h1 className="text-4xl row-start-1">Edit User:  {username}</h1>
+      <div className="row-start-2">
         <form onSubmit={(e) => onSave(e)}>
-          <div className="">
+          <div className="py-4">
             <label htmlFor="Username">
               <h1 className="text-2xl">Username</h1>
               <input
@@ -55,11 +55,11 @@ export default function userPage() {
                 placeholder={username}
                 value={username}
                 onChange={(e) => onChange(e)}
-                className="h-12 border-4 border-hidden border-indigo-600 bg-indigo-100 shadow-2xl"
+                className="h-12 border-4 border-hidden border-indigo-600 bg-indigo-100 shadow-xl"
               />
             </label>
           </div>
-          <div>
+          <div className="py-4">
             <label htmlFor="Email">
               <h1 className="text-2xl">Email</h1>
               <input
@@ -68,11 +68,11 @@ export default function userPage() {
                 placeholder={email}
                 value={email}
                 onChange={(e) => onChange(e)}
-                className="h-12 border-4 border-none border-indigo-600 bg-indigo-100 shadow-2xl"
+                className="h-12 border-4 border-none border-indigo-600 bg-indigo-100 shadow-xl"
               />
             </label>
           </div>
-          <div>
+          <div className="py-4">
             <label htmlFor="Password">
               <h1 className="text-2xl">Password</h1>
               <input
@@ -81,7 +81,7 @@ export default function userPage() {
                 placeholder="*********"
                 // value="*********"
                 onChange={(e) => onChange(e)}
-                className="h-12 border-4 border-none border-indigo-600 bg-indigo-100 shadow-2xl"
+                className="h-12 border-4 border-none border-indigo-600 bg-indigo-100 shadow-xl"
               />
             </label>
           </div>

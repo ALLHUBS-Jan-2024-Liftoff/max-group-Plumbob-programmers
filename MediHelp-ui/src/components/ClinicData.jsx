@@ -7,11 +7,15 @@ import DoD from "../images/DoD.png";
 import veteransHospital from "../images/VeteransHospital.png";
 import criticalHospital from "../images/criticalHospital.png";
 
+import PopUp from "./PopUp";
+
 export default function ClinicData() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [offset, setOffset] = useState(0);
-
+  const [openPopUp, setOpenPopUp] = useState(false);
+  const HandleRemovePopUp = () => setOpenPopUp(false);
+  const [index, setIndex] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -115,11 +119,9 @@ export default function ClinicData() {
     setOffset((prevOffset) => (prevOffset > 0 ? prevOffset - 50 : 0));
   };
 
-  const [facilityState, setFacilityState] = useState([]);
-
   return (
     <div>
-      <div className="w-full ">
+      <div className="flex justify-center items-center bg-opacity-20 p-8 ">
         <button
           onClick={previousPage}
           className="bg-transparent hover:bg-blue-500 text-black font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
@@ -139,12 +141,17 @@ export default function ClinicData() {
           {data.map((facility, index) => (
             <div key={index} className="inline-flex w-2/4 p-6 h-64">
               <div
-                onClick={() => console.log(index + offset)}
+                onClick={() => {
+                  setOpenPopUp(true);
+                  setIndex(index);
+                }}
                 className="grid grid-rows-3 grid-flow-col px-4 py-4 leading-10 border-solid border-2 bg-gray-700 bg-opacity-5 text-left w-full gap-1 rounded-lg 
                         transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none hover:border-black"
               >
                 {hospitalType(facility.hospital_type)}
-                <h3 className="row-span-1 text-xl ">{facility.facility_name}</h3>
+                <h3 className="row-span-1 text-xl ">
+                  {facility.facility_name}
+                </h3>
                 <div className="col-span-1 row-span-1 ">
                   <h3 className="row-span-1 ">{facility.address}</h3>
                   <p>City: {facility.citytown}</p>
@@ -157,7 +164,26 @@ export default function ClinicData() {
               </div>
             </div>
           ))}
-        
+          <div className="flex justify-center items-center bg-opacity-20 p-8 ">
+            <button
+              onClick={previousPage}
+              className="bg-transparent hover:bg-blue-500 text-black font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            >
+              Previous Page
+            </button>
+
+            <button
+              onClick={nextPage}
+              className="bg-transparent hover:bg-blue-500 text-black font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            >
+              Next Page
+            </button>
+          </div>
+          <PopUp
+            openPopUp={openPopUp}
+            closePopUp={HandleRemovePopUp}
+            data={data[index]}
+          />
         </div>
       ) : (
         <div>Loading...</div>

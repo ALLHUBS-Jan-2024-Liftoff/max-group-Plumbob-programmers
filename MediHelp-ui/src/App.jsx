@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import AdminPage from './pages/AdminPage';
 import UserView from './pages/UserView';
 import UserEdit from './pages/UserEdit';
+import AboutUsPage from './pages/AboutUsPage';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/Admin" element={<AdminPage />}/>
           <Route path="/users/:id" element={<UserView/>}/>
           <Route path="/users/edit/:id" element={<UserEdit/>}/>
+          <Route path="/about" element={<AboutUsPage/>}/>
           <Route path="*" element={<BadPage />}/>
         </Routes>
       </BrowserRouter>

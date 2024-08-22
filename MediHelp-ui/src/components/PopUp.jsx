@@ -86,19 +86,19 @@ export default function PopUp({ openPopUp, closePopUp, data }) {
       onClick={handlelosePopUp}
       className="fixed inset-0 bg-black flex justify-center items-center bg-opacity-20 backdrop-blur-sm "
     >
-      <div className="p-2 bg-white w-10/12 md:w-3/5 lg:1/3 shadow-inner border-e-emerald-600 rounded-lg py-5 ">
+      <div className="p-2 bg-white w-10/12 md:w-1/3 lg:1/3 shadow-inner rounded-lg border border-solid border-indigo-600">
         <div className=""></div>
 
         <div>
           {hospitalType(data.hospital_type)}
-          <div className="absolute right-80 top-80">
+          <div className="">
             <a
               href={googleMapsLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
+              className="text-blue-500 ww"
             >
-              <img src={googleMaps} alt={data.address} height={80} width={80}/>
+              <img src={googleMaps} alt={data.address} height={80} width={80} />
               <p>Google Maps</p>
             </a>
           </div>

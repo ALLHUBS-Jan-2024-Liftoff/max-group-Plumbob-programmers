@@ -37,18 +37,18 @@ export default function Users() {
       <table className="table-auto justify-self-center">
         <thead>
           <tr>
-            <th className="px-16">ID</th>
-            <th className="px-48 ">Username</th>
+            <th className="px-24">ID</th>
+            <th className="px-48">Username</th>
             <th className="px-48">Email</th>
-            <th className="px-16">Action</th>
+            <th className="px-24">Action</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
             <tr key={index}>
-              <td>{item.id}</td>
-              <td>{item.username}</td>
-              <td>{item.email}</td>
+              <td className="px-24">{item.id}</td>
+              <td className="px-48">{item.username}</td>
+              <td className="px-48">{item.email}</td>
 
               <td>
                 <Link to={`/users/${item.id}`}>

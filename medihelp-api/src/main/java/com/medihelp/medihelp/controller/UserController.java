@@ -40,4 +40,21 @@ public class UserController {
         return "user with id " + id + " has been deleted.";
     }
 
+    @PutMapping("/users/edit/{id}")
+    public User updateUser(@RequestBody User newUser, @PathVariable Long id) {
+        return userRepository.findById(id).map(user -> {
+            if (newUser.getUsername() != null) {
+                user.setUsername(newUser.getUsername());
+            }
+            if (newUser.getEmail() != null) {
+                user.setEmail(newUser.getEmail());
+            }
+            if (newUser.getPassword() != null) {
+                user.setPassword(newUser.getPassword());
+            }
+            return userRepository.save(user);
+        }).orElseThrow(() -> new RuntimeException("User ID not Found"));
+    }
+
+
 }

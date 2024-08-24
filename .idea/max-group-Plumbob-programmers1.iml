@@ -7,5 +7,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-web:6.1.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-beans:6.1.10" level="project" />
+    <orderEntry type="library" name="Gradle: jakarta.validation:jakarta.validation-api:3.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-context:6.1.10" level="project" />
   </component>
 </module>

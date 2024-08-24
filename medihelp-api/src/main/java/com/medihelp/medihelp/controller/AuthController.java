@@ -2,6 +2,7 @@ package com.medihelp.medihelp.controller;
 import com.medihelp.medihelp.model.LoginDTO;
 import com.medihelp.medihelp.model.User;
 import jakarta.validation.Valid;
+import com.medihelp.medihelp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;

@@ -1,14 +1,11 @@
 package com.medihelp.medihelp.service;
 
-import com.medihelp.medihelp.config.JwtService;
+
 import com.medihelp.medihelp.model.User;
 import com.medihelp.medihelp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

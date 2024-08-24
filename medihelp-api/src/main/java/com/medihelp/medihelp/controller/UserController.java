@@ -3,6 +3,7 @@ import com.medihelp.medihelp.model.User;
 import com.medihelp.medihelp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.medihelp.medihelp.service.UserService;
 
 
 

@@ -1,6 +1,7 @@
 package com.medihelp.medihelp.service;
 
 
+import com.medihelp.medihelp.config.JwtService;
 import com.medihelp.medihelp.model.User;
 import com.medihelp.medihelp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

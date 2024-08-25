@@ -19,7 +19,7 @@ const Registration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Registration Data:', formData);
-    await axios.post("http://localhost:8080/register", formData)
+    await axios.post("http://localhost:8080/auth/register", formData)
     window.location.href = '/';
     alert('Successfully registered');
     

@@ -3,6 +3,7 @@ import com.medihelp.medihelp.model.User;
 import com.medihelp.medihelp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.medihelp.medihelp.service.UserService;
 
 
 
@@ -11,14 +12,21 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/register")
     User newUser(@RequestBody User newUser) {
+
+
+
         return userRepository.save(newUser);
     }
 
     @GetMapping("/users")
     public Iterable<User> displayUsers() {
+
+        System.out.println(userService.getAuthenticatedUsername());
         return userRepository.findAll();
     }
 

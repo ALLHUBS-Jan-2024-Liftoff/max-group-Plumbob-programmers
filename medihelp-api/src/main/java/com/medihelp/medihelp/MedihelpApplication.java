@@ -10,4 +10,8 @@ public class MedihelpApplication {
 		SpringApplication.run(MedihelpApplication.class, args);
 	}
 
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}
 }

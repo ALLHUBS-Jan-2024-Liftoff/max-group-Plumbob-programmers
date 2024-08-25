@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import {Outlet, Link} from "react-router-dom";
+import axios from "axios";
 
 const loginform = () => {
   const [loginData, setLoginData] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
@@ -17,7 +18,7 @@ const loginform = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Login Data:', loginData);
-    await axios.post("http://localhost:8080/auth/login", formData)
+    await axios.post("http://localhost:8080/auth/login", loginData)
     window.location.href = '/';
     alert('Successfully logged in');
     

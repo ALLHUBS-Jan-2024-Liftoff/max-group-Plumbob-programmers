@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import {Outlet, Link} from "react-router-dom";
+import axios from "axios";
 
 const loginform = () => {
   const [loginData, setLoginData] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
@@ -14,9 +15,12 @@ const loginform = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Login Data:', loginData);
+    await axios.post("http://localhost:8080/auth/login", loginData)
+    window.location.href = '/';
+    alert('Successfully logged in');
     
   };
 
@@ -26,12 +30,12 @@ const loginform = () => {
       <h2 className='text-gray-800 text-center text-2xl font-bold'>Login</h2>
       <div className='w-40 mb-8 mx-auto block py-10'>
         <div>
-          <label>Email</label>
+          <label>Username</label>
           <input
           className='class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"'
-            type="email"
-            name="email"
-            value={loginData.email}
+            type="username"
+            name="username"
+            value={loginData.username}
             onChange={handleChange}
             required
           />

@@ -3,7 +3,7 @@ import genHospital from "../images/genHospital.png";
 import childrenHospital from "../images/childrenHospital.png";
 import psychiatric from "../images/psychiatric.png";
 import DoD from "../images/DoD.png";
-import veteransHospital from "../images/VeteransHospital.png";
+import veteransHospital from "../images/veteransHospital.png";
 import criticalHospital from "../images/criticalHospital.png";
 import googleMaps from "../images/google.png";
 export default function PopUp({ openPopUp, closePopUp, data }) {

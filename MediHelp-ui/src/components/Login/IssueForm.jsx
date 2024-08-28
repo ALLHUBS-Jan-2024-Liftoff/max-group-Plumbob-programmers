@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const IssueForm = () => {
-  // State to manage form data
+  
   const [formData, setFormData] = useState({
     issueType: '',
     description: ''
@@ -18,7 +18,7 @@ const IssueForm = () => {
     });
   };
 
-  // Function to handle form submission
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 

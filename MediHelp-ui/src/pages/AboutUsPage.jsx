@@ -2,7 +2,7 @@ import {Outlet, Link} from "react-router-dom";
 import Banner from "../components/banners";
 import Footer from "../components/footer";
 import ClinicData from "../components/ClinicData";
-
+import AboutUs from "../components/AboutUs";
 export default function MainPage(){
     return    (   
     <>
@@ -10,7 +10,7 @@ export default function MainPage(){
       <Banner />
     </div>
      <div>
-     <ClinicData/>
+     <AboutUs/>
      </div>
     <div>
       <Footer />

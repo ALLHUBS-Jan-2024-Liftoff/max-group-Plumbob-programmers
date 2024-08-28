@@ -6,14 +6,13 @@ import LandingPage from './components/landingpage';
 import Footer from './components/footer';
 =======
 import { useState } from 'react';
-import './App.css';
+
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import BadPage from './pages/BadPage';
 import MainPage from './pages/MainPage';
->>>>>>> c5441e020fffd91eccc93ac0a807fe456142cd58
 
 function App() {
 
@@ -40,7 +39,12 @@ function App() {
           <Route index element={<Home />}/>
           <Route path="/home" element={<Home />}/>
           <Route path="/login" element={<Login />}/>
+          <Route path="/register" element={<Register />}/>
           <Route path="/MainPage" element={<MainPage />}/>
+          <Route path="/Admin" element={<AdminPage />}/>
+          <Route path="/users/:id" element={<UserView/>}/>
+          <Route path="/users/edit/:id" element={<UserEdit/>}/>
+          <Route path="/about" element={<AboutUsPage/>}/>
           <Route path="*" element={<BadPage />}/>
         </Routes>
       </BrowserRouter>

@@ -1,79 +1,91 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const apiUrl = 'http://localhost:5173/api/issues'; // Base URL of your Spring Boot application
+
 const IssueForm = () => {
-    const [issueType, setIssueType] = useState('');
-    const [description, setDescription] = useState('');
     const [issues, setIssues] = useState([]);
+    const [newIssue, setNewIssue] = useState({ issueType: '', description: '' });
     const [error, setError] = useState(null);
+    const [successMessage, setSuccessMessage] = useState('');
 
     // Fetch issues from the backend
     const fetchIssues = async () => {
         try {
-            const response = await axios.get('https://data.cms.gov/api/issues'); // Ensure this matches your Spring Boot endpoint
+            const response = await axios.get('http://localhost:5173/api/issues');
             setIssues(response.data);
         } catch (error) {
-            setError(error);
             console.error('Error fetching issues:', error);
+            setError('Error fetching issues');
         }
     };
 
-    // Fetch issues on component mount
+    // Create a new issue
+    const createIssue = async (issueData) => {
+        try {
+            await axios.post('http://localhost:5173/api/issues', issueData);
+            setSuccessMessage('Issue submitted successfully');
+            // Optionally refetch issues after creation
+            fetchIssues();
+        } catch (error) {
+            console.error('Error submitting issue:', error);
+            setError('Error submitting issue');
+        }
+    };
+
+    // Handle form submit
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!newIssue.issueType || !newIssue.description) {
+            setError('Please fill out both fields');
+            return;
+        }
+        createIssue(newIssue);
+        setNewIssue({ issueType: '', description: '' }); // Clear the form after submission
+    };
+
+    // Fetch issues when the component mounts
     useEffect(() => {
         fetchIssues();
     }, []);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            // Submit form data to backend
-            await axios.post('/api/issues', { issueType, description });
-            alert('Issue submitted successfully!');
-            // Optionally fetch updated list of issues
-            fetchIssues();
-        } catch (error) {
-            console.error('Error submitting issue:', error);
-        }
-    };
-
     return (
         <div>
-            <h2>Submit an Issue</h2>
+            <h2>Issue Form</h2>
+            {error && <div className="error">{error}</div>}
+            {successMessage && <div className="success">{successMessage}</div>}
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Issue Type</label>
+                    <label htmlFor="issueType">Issue Type:</label>
                     <input
                         type="text"
-                        value={issueType}
-                        onChange={(e) => setIssueType(e.target.value)}
-                        required
+                        id="issueType"
+                        value={newIssue.issueType}
+                        onChange={(e) => setNewIssue({ ...newIssue, issueType: e.target.value })}
                     />
                 </div>
                 <div>
-                    <label>Description</label>
+                    <label htmlFor="description">Description:</label>
                     <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
+                        id="description"
+                        value={newIssue.description}
+                        onChange={(e) => setNewIssue({ ...newIssue, description: e.target.value })}
                     />
                 </div>
-                <button type="submit">Submit Issue</button>
+                <button type="submit">Submit</button>
             </form>
-            {error && <div>Error: {error.message}</div>}
-            <div>
-                <h3>Existing Issues</h3>
+            <h3>Existing Issues</h3>
+            <ul>
                 {issues.length > 0 ? (
-                    <ul>
-                        {issues.map((issue) => (
-                            <li key={issue.id}>
-                                <strong>{issue.issueType}:</strong> {issue.description}
-                            </li>
-                        ))}
-                    </ul>
+                    issues.map((issue) => (
+                        <li key={issue.id}>
+                            <strong>{issue.issueType}:</strong> {issue.description}
+                        </li>
+                    ))
                 ) : (
-                    <p>No issues found.</p>
+                    <li>No issues available</li>
                 )}
-            </div>
+            </ul>
         </div>
     );
 };

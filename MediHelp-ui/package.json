@@ -11,8 +11,11 @@
   
   },
   "dependencies": {
+<<<<<<< HEAD
     "@headlessui/react": "^2.1.3",
     "axios": "^1.7.5",
+=======
+>>>>>>> 3550b99 (Fetched External API data)
     "cors": "^2.8.5",
     "http-proxy-middleware": "^3.0.0",
     "react": "^18.3.1",

@@ -58,3 +58,7 @@ bin/
 **/build/
 **/.eslintcache
 **/node_modules/
+
+# file: ~/.gitignore_global
+.DS_Store
+.idea

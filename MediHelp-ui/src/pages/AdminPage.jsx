@@ -3,6 +3,7 @@ import Banner from "../components/banners";
 import Footer from "../components/footer";
 import ClinicData from "../components/ClinicData";
 
+import Users from '../components/users';
 export default function MainPage(){
     return    (   
     <>
@@ -10,7 +11,7 @@ export default function MainPage(){
       <Banner />
     </div>
      <div>
-     <ClinicData/>
+     <Users />
      </div>
     <div>
       <Footer />

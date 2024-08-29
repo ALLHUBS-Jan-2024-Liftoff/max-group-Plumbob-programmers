@@ -12,7 +12,7 @@ const IssueForm = () => {
     // Fetch issues from the backend
     const fetchIssues = async () => {
         try {
-            const response = await axios.get(apiUrl);
+            const response = await axios.get('http://localhost:5173/api/issues');
             setIssues(response.data);
         } catch (error) {
             console.error('Error fetching issues:', error);
@@ -23,7 +23,7 @@ const IssueForm = () => {
     // Create a new issue
     const createIssue = async (issueData) => {
         try {
-            await axios.post(apiUrl, issueData);
+            await axios.post('http://localhost:5173/api/issues', issueData);
             setSuccessMessage('Issue submitted successfully');
             // Optionally refetch issues after creation
             fetchIssues();

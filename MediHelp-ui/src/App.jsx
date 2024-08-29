@@ -1,15 +1,17 @@
-<<<<<<< HEAD
+
 import { useState } from 'react'
 import './App.css'
 import Banner from "./components/banners";
 import LandingPage from './components/landingpage';
 import Footer from './components/footer';
-=======
+
 import { useState } from 'react';
 
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from "./pages/Home";
+import IssueForm from './components/Login/IssueForm';
+
 import Login from "./pages/Login";
 import BadPage from './pages/BadPage';
 import MainPage from './pages/MainPage';
@@ -17,7 +19,7 @@ import MainPage from './pages/MainPage';
 function App() {
 
   return (
-<<<<<<< HEAD
+
     <>
       <div>
         <Banner />
@@ -32,8 +34,7 @@ function App() {
       
     </>
   )
-=======
-    <div >
+    <div>
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />}/>
@@ -49,8 +50,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-)
->>>>>>> c5441e020fffd91eccc93ac0a807fe456142cd58
+
 }
 
 export default App

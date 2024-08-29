@@ -1,7 +1,10 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import IssueForm from './IssueForm';
+import IssueForm from '../../../../../components/Login/IssueForm';
+
+// Mocking axios or fetch if used in IssueForm to avoid real API calls
+jest.mock('axios'); // or jest.mock('../path/to/fetchFunction');
 
 describe('IssueForm Component', () => {
     test('renders IssueForm correctly', () => {
@@ -33,13 +36,16 @@ describe('IssueForm Component', () => {
         expect(mockOnSubmit).toHaveBeenCalled();
     });
 
-    test('displays error messages for invalid input', () => {
+    test('displays error messages for invalid input', async () => {
         render(<IssueForm />);
         const submitButton = screen.getByRole('button', { name: /submit/i });
         
         fireEvent.click(submitButton);
 
-        expect(screen.getByText(/title is required/i)).toBeInTheDocument();
-        expect(screen.getByText(/description is required/i)).toBeInTheDocument();
+        // Using waitFor to handle async state updates
+        await waitFor(() => {
+            expect(screen.getByText(/title is required/i)).toBeInTheDocument();
+            expect(screen.getByText(/description is required/i)).toBeInTheDocument();
+        });
     });
 });

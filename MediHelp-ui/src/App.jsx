@@ -1,21 +1,40 @@
+
+import { useState } from 'react'
+import './App.css'
+import Banner from "./components/banners";
+import LandingPage from './components/landingpage';
+import Footer from './components/footer';
+
 import { useState } from 'react';
 
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from "./pages/Home";
+import IssueForm from './components/Login/IssueForm';
+
 import Login from "./pages/Login";
 import BadPage from './pages/BadPage';
 import MainPage from './pages/MainPage';
-import Register from './pages/Register';
-import AdminPage from './pages/AdminPage';
-import UserView from './pages/UserView';
-import UserEdit from './pages/UserEdit';
-import AboutUsPage from './pages/AboutUsPage';
 
 function App() {
 
   return (
-    <div >
+
+    <>
+      <div>
+        <Banner />
+      </div>
+      <div>
+        <LandingPage/>
+      </div>
+      <div>
+        <Footer />
+      </div>
+    
+      
+    </>
+  )
+    <div>
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />}/>
@@ -31,7 +50,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-)
+
 }
 
 export default App

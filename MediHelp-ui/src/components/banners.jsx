@@ -1,5 +1,5 @@
 
-import logo from "../images/navbarLogo.png"
+import logo from "../images/Logo.png"
 import {Outlet, Link} from "react-router-dom";
 import {MenuButton, Menu, MenuItems} from '@headlessui/react'
 

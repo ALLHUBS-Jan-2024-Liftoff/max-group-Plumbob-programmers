@@ -3,8 +3,16 @@
 @tailwind utilities;
 
 
+<<<<<<< HEAD
+@layer base {
+  body {
+    
+  }
+}
+=======
 /* @layer base {
   body {
     
   }
 } */
+>>>>>>> c5441e020fffd91eccc93ac0a807fe456142cd58

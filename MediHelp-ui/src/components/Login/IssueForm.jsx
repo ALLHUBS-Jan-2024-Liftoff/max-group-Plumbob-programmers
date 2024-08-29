@@ -1,93 +1,132 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; 
 
 const IssueForm = () => {
-  
-  const [formData, setFormData] = useState({
-    issueType: '',
-    description: ''
-  });
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [issues, setIssues] = useState([]);
+    const [selectedIssue, setSelectedIssue] = useState(null);
+    const [newComment, setNewComment] = useState('');
+    const [editingComment, setEditingComment] = useState(null);
 
-  // State to handle form submission status
-  const [submissionStatus, setSubmissionStatus] = useState('');
+    useEffect(() => {
+        // Fetch all issues and their comments on component mount
+        axios.get('/issues')
+            .then(response => setIssues(response.data))
+            .catch(error => console.error('Error fetching issues:', error));
+    }, []);
 
-  // Function to handle changes in form inputs
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+    const handleAddIssue = () => {
+        // Add a new issue to the database
+        axios.post('/issues', { title, description })
+            .then(response => {
+                setIssues([...issues, response.data]);
+                setTitle('');
+                setDescription('');
+            })
+            .catch(error => console.error('Error adding issue:', error));
+    };
 
-  
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleAddComment = () => {
+        // Add a comment to the selected issue
+        if (selectedIssue) {
+            axios.post(`/issues/${selectedIssue.issue_id}/comments`, { comment_text: newComment })
+                .then(response => {
+                    setSelectedIssue({
+                        ...selectedIssue,
+                        comments: [...selectedIssue.comments, response.data]
+                    });
+                    setNewComment('');
+                })
+                .catch(error => console.error('Error adding comment:', error));
+        }
+    };
 
-    // Check if form data is valid
-    if (!formData.issueType || !formData.description) {
-      setSubmissionStatus('Please fill in all fields.');
-      return;
-    }
+    const handleEditComment = (comment) => {
+        // Set the comment to be edited
+        setEditingComment(comment);
+        setNewComment(comment.comment_text);
+    };
 
-    try {
-      // Send form data to the backend API
-      const response = await fetch('https://data.cms.gov/issues', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    const handleUpdateComment = () => {
+        // Update an existing comment
+        if (editingComment) {
+            axios.put(`/comments/${editingComment.comment_id}`, { comment_text: newComment })
+                .then(response => {
+                    setSelectedIssue({
+                        ...selectedIssue,
+                        comments: selectedIssue.comments.map(comment =>
+                            comment.comment_id === editingComment.comment_id ? response.data : comment
+                        )
+                    });
+                    setNewComment('');
+                    setEditingComment(null);
+                })
+                .catch(error => console.error('Error updating comment:', error));
+        }
+    };
 
-      // Handle server response
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+    const handleDeleteComment = (commentId) => {
+        // Delete a comment from the database
+        axios.delete(`/comments/${commentId}`)
+            .then(() => {
+                setSelectedIssue({
+                    ...selectedIssue,
+                    comments: selectedIssue.comments.filter(comment => comment.comment_id !== commentId)
+                });
+            })
+            .catch(error => console.error('Error deleting comment:', error));
+    };
 
-      // Clear form data and update status on successful submission
-      setFormData({
-        issueType: '',
-        description: ''
-      });
-      setSubmissionStatus('Issue submitted successfully!');
-    } catch (error) {
-      setSubmissionStatus(`Error submitting issue: ${error.message}`);
-    }
-  };
-
-  return (
-    <div>
-      <h2>Submit an Issue</h2>
-      <form onSubmit={handleSubmit}>
+    return (
         <div>
-          <label htmlFor="issueType">Issue Type</label>
-          <select
-            id="issueType"
-            name="issueType"
-            value={formData.issueType}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select an issue type</option>
-            <option value="Bug">Bug</option>
-            <option value="Feature Request">Feature Request</option>
-            <option value="Other">Other</option>
-          </select>
+            <h2>Create New Issue</h2>
+            <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Issue Title"
+            />
+            <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Issue Description"
+            />
+            <button onClick={handleAddIssue}>Add Issue</button>
+
+            <h2>Issues List</h2>
+            {issues.map(issue => (
+                <div key={issue.issue_id}>
+                    <h3>{issue.title}</h3>
+                    <p>{issue.description}</p>
+                    <button onClick={() => setSelectedIssue(issue)}>View Comments</button>
+                </div>
+            ))}
+
+            {selectedIssue && (
+                <div>
+                    <h2>Comments for {selectedIssue.title}</h2>
+                    {selectedIssue.comments.map(comment => (
+                        <div key={comment.comment_id}>
+                            <p>{comment.comment_text}</p>
+                            <button onClick={() => handleEditComment(comment)}>Edit Comment</button>
+                            <button onClick={() => handleDeleteComment(comment.comment_id)}>Delete Comment</button>
+                        </div>
+                    ))}
+                    <textarea
+                        value={newComment}
+                        onChange={(e) => setNewComment(e.target.value)}
+                        placeholder="Add a new comment"
+                    />
+                    {editingComment ? (
+                        <button onClick={handleUpdateComment}>Update Comment</button>
+                    ) : (
+                        <button onClick={handleAddComment}>Add Comment</button>
+                    )}
+                </div>
+            )}
         </div>
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-          ></textarea>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-      {submissionStatus && <p>{submissionStatus}</p>}
-    </div>
-  );
+    );
 };
 
 export default IssueForm;
